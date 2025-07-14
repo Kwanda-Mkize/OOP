@@ -3,7 +3,6 @@ public class Client_2 : Adapter
 {
   public override void Execute()
   {
-    // Bank client2 = new Bank("222000333", "Arnold Mkhize", 1500, "2445");
     BankAccount client2 = new BankAccount.BankBuilder()
     .setAccountNumber("222000333")
     .setAccountHolder("Arnold Mkhize")
