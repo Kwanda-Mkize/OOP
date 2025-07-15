@@ -14,3 +14,5 @@ Logger.Instance.PrintCardPurchaseLogs();
 Logger.Instance.PrintDepositLogs();
 
 
+// new B();
+

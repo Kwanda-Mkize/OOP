@@ -31,10 +31,10 @@ namespace OPP
           if (_instance == null)
           {
            _instance = new Logger();
-            // return  _instance = new Logger();
           }
         return _instance;
         }
+            // return  _instance = new Logger();
       }
     }
 
@@ -77,10 +77,7 @@ namespace OPP
       }
     }
     
-     public void Log(string message)
-    {
-        Console.WriteLine($"Thread {Thread.CurrentThread.ManagedThreadId}: {message}");
-    }
+  
 
   }
 }

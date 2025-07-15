@@ -7,10 +7,10 @@ namespace OOP
 {
   internal class BankAccount
   {
-    private string AccountNumber { get; set; }
-    private string AcountHolder { get; set; }
+    private string? AccountNumber { get; set; }
+    private string? AcountHolder { get; set; }
     private decimal Balance { get; set; }
-    private string Pin { get; set; }
+    private string? Pin { get; set; }
 
     private BankAccount(){ }
 
@@ -53,7 +53,7 @@ namespace OOP
         if (this.Balance > amount)
         {
           Balance -= amount;
-          Logger.Instance.LogWithdraw(AccountNumber, Balance, amount, timeStamp);
+          Logger.Instance.LogWithdraw(AccountNumber?? string.Empty, Balance, amount, timeStamp);
 
         }
         else
@@ -77,7 +77,7 @@ namespace OOP
         if (this.Balance > amount)
         {
           Balance -= amount;
-          Logger.Instance.LogDeposit(AccountNumber, Balance, amount, SecondAccountNumber, timeStamp);
+          Logger.Instance.LogDeposit(AccountNumber?? string.Empty, Balance, amount, SecondAccountNumber, timeStamp);
 
         }
         else
@@ -101,7 +101,7 @@ namespace OOP
         if (this.Balance > amount)
         {
           Balance -= amount;
-          Logger.Instance.LogCardPurchase(AccountNumber, Balance, amount, StoreAccountNumber, timeStamp);
+          Logger.Instance.LogCardPurchase(AccountNumber ?? string.Empty, Balance, amount, StoreAccountNumber, timeStamp);
 
         }
         else
