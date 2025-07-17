@@ -5,44 +5,22 @@ using OPP;
 
 namespace OOP
 {
-  internal class BankAccount
+  public class BankAccount
   {
-    private string? AccountNumber { get; set; }
-    private string? AcountHolder { get; set; }
+    public string? AccountNumber { get; set; }
+    private string? AccountHolder { get; set; }
     private decimal Balance { get; set; }
     private string? Pin { get; set; }
 
-    private BankAccount(){ }
-
-    public class BankBuilder
+    public BankAccount(string accountNumber, string accountHolder, decimal balance, string pin)
     {
-      private readonly BankAccount bankAccountBuilder = new BankAccount();
-       public BankBuilder setAccountNumber(string accountNumber )
-        { 
-          bankAccountBuilder.AccountNumber = accountNumber;
-         return this;
-        }
-         public BankBuilder setAccountHolder(string accountHolder )
-        { 
-          bankAccountBuilder.AcountHolder = accountHolder;
-         return this;
-        }
-         public BankBuilder setBalance(decimal balance )
-        { 
-          bankAccountBuilder.Balance = balance;
-         return this;
-        }
-         public BankBuilder setPin(string pin)
-        { 
-          bankAccountBuilder.Pin= pin;
-         return this;
-        }
-         public BankAccount build()
-        {
-          return bankAccountBuilder;
-        }  
+      AccountNumber = accountNumber;
+      AccountHolder = accountHolder;
+      Balance = balance;
+      Pin = pin;
     }
 
+    private object lockObject = new Object();
     public void Widthdraw(string pin, decimal amount)
     {
 
@@ -50,15 +28,17 @@ namespace OOP
       if (this.Pin == pin)
       {
 
-        if (this.Balance > amount)
+        lock (lockObject)
         {
-          Balance -= amount;
-          Logger.Instance.LogWithdraw(AccountNumber?? string.Empty, Balance, amount, timeStamp);
-
-        }
-        else
-        {
-          throw new InvalidOperationException("Not enough funds to withdraw");
+          if (this.Balance >= amount)
+          {
+            this.Balance = this.Balance - amount;
+            Logger.Instance.LogWithdraw(AccountNumber ?? string.Empty, this.Balance, amount, timeStamp);
+          }
+          else
+          {
+            throw new InvalidOperationException("Not enough funds to withdraw");
+          }
         }
       }
       else
@@ -77,7 +57,8 @@ namespace OOP
         if (this.Balance > amount)
         {
           Balance -= amount;
-          Logger.Instance.LogDeposit(AccountNumber?? string.Empty, Balance, amount, SecondAccountNumber, timeStamp);
+
+          Logger.Instance.LogDeposit(AccountNumber ?? string.Empty, Balance, amount, SecondAccountNumber, timeStamp);
 
         }
         else
@@ -87,14 +68,14 @@ namespace OOP
       }
       else
       {
-          throw new InvalidOperationException("Wrong Pin try again");
+        throw new InvalidOperationException("Wrong Pin try again");
       }
     }
-    
 
-      public void CardPurchase(string pin, decimal amount, string StoreAccountNumber)
+
+    public void CardPurchase(string pin, decimal amount, string StoreAccountNumber)
     {
-       DateTime timeStamp = DateTime.UtcNow;
+      DateTime timeStamp = DateTime.UtcNow;
       if (this.Pin == pin)
       {
 
@@ -113,7 +94,7 @@ namespace OOP
       {
         throw new InvalidOperationException("Wrong Pin try again");
       }
-      
+
     }
   }
 }

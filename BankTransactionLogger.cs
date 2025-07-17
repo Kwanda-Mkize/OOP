@@ -16,7 +16,7 @@ namespace OPP
     private Logger()
     {
       _instanceCount++;
-      Console.WriteLine($"Instance {_instanceCount} Created");
+      Console.WriteLine($"Instance Created");
       LoggedWithdraws = new List<string>();
       LoggedDeposits = new List<string>();
       LoggedCardPurchases = new List<string>();
@@ -30,11 +30,11 @@ namespace OPP
         {
           if (_instance == null)
           {
-           _instance = new Logger();
+            _instance = new Logger();
           }
-        return _instance;
+          return _instance;
         }
-            // return  _instance = new Logger();
+        // return  _instance = new Logger();
       }
     }
 
@@ -76,8 +76,8 @@ namespace OPP
         Console.WriteLine($"Purchase Transaction Logged: {item}");
       }
     }
-    
-  
+
+
 
   }
 }

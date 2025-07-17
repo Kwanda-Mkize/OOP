@@ -4,12 +4,12 @@ public class Client_1 : Adapter
 {
   public override void Execute()
   {
-    BankAccount client1 = new BankAccount.BankBuilder()
+    BankAccount client1 = BankBuilder.Builder()
     .setAccountNumber("111000555")
     .setAccountHolder("Kwanda Mkhize")
     .setBalance(100)
     .setPin("1223")
-    .build();
+    .Build();
 
     client1.Widthdraw("1213", 50);
   }
