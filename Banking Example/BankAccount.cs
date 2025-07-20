@@ -1,6 +1,6 @@
 public abstract class BankAccount
 {
-  public decimal Balance { get; set; }
+  protected decimal Balance { get; set; }
   public BankAccount(decimal balance)
   {
     Balance = balance;

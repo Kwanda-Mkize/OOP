@@ -1,18 +1,18 @@
 public class SavingsAccount : BankAccount
 {
-  public decimal interest { get; set; }
+  public decimal Interest { get; set; }
   public SavingsAccount(decimal balance) : base(balance)
   {
   }
   public override decimal CalculateInterest()
   {
-    interest = Balance * 0.02m;
-    return interest;
+    Interest = Balance * 0.02m;
+    return Interest;
   }
 
   public void ShowInterest()
   {
-    Console.WriteLine($"Total interest accumulated {interest}");
+    Console.WriteLine($"Total interest accumulated {Interest}");
   }
 
 }
